@@ -72,7 +72,7 @@
   let myApiKey = '4fee8375-b9a8-41f7-be70-c5ff22687b81'; //null; // set your API key
   let peer = null;
   let meshRoom = null;
-  const defaultRoomName = '1';
+  const defaultRoomName = 'go5394';
 
   function getApiKey() {
     let key = document.getElementById('api_key_text').value;
@@ -80,8 +80,7 @@
   }
 
   function setInitialRoomName() {
-    let rnd = '0000' + Math.floor(Math.random() * 10000);
-    let roomname = rnd.slice( -4 );
+    let roomname = "go5394";
     document.getElementById('roomname_text').value = roomname;
   }
 
