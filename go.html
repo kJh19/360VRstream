@@ -3,48 +3,19 @@
 
 <head>
   <meta charset="utf-8">
-  <title>360Go Skyway</title>
+  <title>360 Skyway</title>
   <meta name="description" content="360 Video — A-Frame">
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
   <script>
-    //function _assert(desc, v) {
-    //  if (v) {
-    //    return;
-    //  }
-    //  else {
-    //    let caller = _assert.caller || 'Top level';
-    //    console.error('ASSERT in %s, %s is :', caller, desc, v);
-    //  }
-    //}
-
-    //function _logStream(stream) {
-    //  console.log(msg + ': id=' + stream.id);
-    //  const videoTracks = stream.getVideoTracks();
-    //  if (videoTracks) {
-    //    console.log('videoTracks.length=' + videoTracks.length);
-    //    for (let i = 0; i < videoTracks.length; i++) {
-    //      const track = videoTracks[i];
-    //      console.log('track.id=' + track.id);
-    //    }
-    //  }
-
-    //  const audioTracks = stream.getAudioTracks();
-    //  if (audioTracks) {
-    //    console.log('audioTracks.length=' + audioTracks.length);
-    //    for (let i = 0; i < audioTracks.length; i++) {
-    //      const track = audioTracks[i];
-    //      console.log('track.id=' + track.id);
-    //    }
-    //  }
-    //}
+    
   </script>
   <script type="text/javascript">
   // ----- use skyway room ----
-  let myApiKey = '2885722c-b2d0-4dd7-9d7b-d9738873effa'; //null; // set your API key
+  let myApiKey = '4fee8375-b9a8-41f7-be70-c5ff22687b81'; //null; // set your API key
   let peer = null;
   let meshRoom = null;
-  const defaultRoomName = 'go5394';
+  const defaultRoomName = '1';
 
   function getApiKey() {
     let key = document.getElementById('api_key_text').value;
@@ -56,7 +27,6 @@
     const re = new RegExp('apikey=([^&=]+)');
     const results = re.exec(search);
     if (results) {
-      //document.getElementById('api_key_text').value = results[1];
       return results[1];
     }
 
@@ -68,25 +38,9 @@
     const re = new RegExp('room=([^&=]+)');
     const results = re.exec(search);
     if (results) {
-      //document.getElementById('roomname_text').value = results[1];
       return results[1];
     }
   }
-
-  //let localStream = null;
-  //function startMediaAndJoinRoom() {
-  //  const mediaConstraints = {video: false, audio: true};
-  //  console.log('--startMediaAndJoinRoom is called--');
-  //  navigator.mediaDevices.getUserMedia(mediaConstraints)
-  //.then( stream => {
-  //    _logStream(stream);
-  //    localStream = stream;
-  //    joinRoom(stream);
-  //  })
-  //  .catch ( err => {
-  //    console.error('getUserMedia ERROR:', err );
-  //  })
-  //}
 
   function joinRoom(stream) {
     let apiKey = getApiKeyFromURL() || myApiKey;
@@ -99,7 +53,6 @@
     peer = new Peer({key: apiKey, debug: 1});
     peer.on('open',function() {
       console.log('--open--');
-      //meshRoom = peer.joinRoom(roomName, {mode: 'mesh', stream: localStream});
       if (stream) {
         meshRoom = peer.joinRoom(roomName, {mode: 'sfu', stream: stream});
       }
@@ -120,9 +73,6 @@
         detachVideo(peerId);
       });
     });
-
-    // -- kick to play in iOS 11 Safari --
-    //setTimeout(playAllRemoteVideo, 1000);
   }
 
   function leaveRoom() {
@@ -168,7 +118,6 @@
       onClick: function (evt) {
         hideWaitMessage();
         joinRoom(null);
-        //startMediaAndJoinRoom();
       }
     });
 
