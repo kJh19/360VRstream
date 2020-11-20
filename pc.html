@@ -17,8 +17,8 @@
   </script>
 </head>
 <body>
-  <h2>RICOH THETA V - SkyWay - Oculus Go</h2>
-  Room:<input id="roomname_text" type="text" size="32" value="test_go_room"></input>&nbsp;
+  <h2>RICOH THETA V - SkyWay</h2>
+  Room:<input id="roomname_text" type="text" size="32" value="test_room"></input>&nbsp;
   SkyWay API Key:<input id="api_key_text" type="text" size="32"></input>
   <br />
   <button id="get_device_button" onclick="getDevice()">Get Devices</button>
@@ -45,32 +45,16 @@
   <div>
     <video id="local_video" autoplay style="width: 320px; height: 180px; border: 1px solid black;"></video>
   </div>
-  Please connect with Oculus Go Browser: <span id="oculus_url"></span><br /><br />
+  Please connect with Browser: <span id="oculus_url"></span><br /><br />
   <span id="jumb_page"></span>
   <div id="container">
   </div>
-  <!--
-  <p>SDP to send:<br />
-    <textarea id="text_for_send_sdp" rows="5" cols="60" readonly="readonly">SDP to send</textarea>
-  </p>
-  <p>SDP received:&nbsp;
-    <button type="button" onclick="onSdpText();">Receive remote SDP</button>
-    <br />
-    <textarea id="text_for_receive_sdp" rows="5" cols="60"></textarea>
-  </p>
-  -->
 </body>
 <script type="text/javascript">
   let localVideo = document.getElementById('local_video');
-  //let remoteVideo = document.getElementById('remote_video');
   let localStream = null;
-  //let peerConnection = null;
-  //let textForSendSdp = document.getElementById('text_for_send_sdp');
-  //let textToReceiveSdp = document.getElementById('text_for_receive_sdp');
 
   // ---- for multi party -----
-  //let peerConnections = [];
-  //let remoteStreams = [];
   let remoteVideos = [];
   const MAX_CONNECTION_COUNT = 3;
 
@@ -85,10 +69,10 @@
   RTCSessionDescription = window.RTCSessionDescription || window.webkitRTCSessionDescription || window.mozRTCSessionDescription;
 
   // ----- use skyway room ----
-  let myApiKey = '2885722c-b2d0-4dd7-9d7b-d9738873effa'; //null; // set your API key
+  let myApiKey = '4fee8375-b9a8-41f7-be70-c5ff22687b81'; //null; // set your API key
   let peer = null;
   let meshRoom = null;
-  const defaultRoomName = 'go5394';
+  const defaultRoomName = '1';
 
   function getApiKey() {
     let key = document.getElementById('api_key_text').value;
@@ -97,7 +81,7 @@
 
   function setInitialRoomName() {
     let rnd = '0000' + Math.floor(Math.random() * 10000);
-    let roomname = 'go5394';// + rnd.slice( -4 );
+    let roomname = rnd.slice( -4 );
     document.getElementById('roomname_text').value = roomname;
   }
 
@@ -170,8 +154,6 @@
       });
     });
 
-    // -- kick to play in iOS 11 Safari --
-    setTimeout(playAllRemoteVideo, 1000);
   }
 
   function leaveRoom() {
@@ -234,7 +216,6 @@
 
   function getRemoteVideoElement(id) {
     let video = remoteVideos[id];
-    //_assert('getRemoteVideoElement() video must exist', video);
     return video;
   }
 
@@ -374,7 +355,6 @@
 
     const videoSource = videoSelect.value;
     if (videoSource) {
-      //options.video = { deviceId: {exact: videoSource} };
       options.video.deviceId = {exact: videoSource};
     }
     const audioSource = audioSelect.value;
