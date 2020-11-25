@@ -138,6 +138,7 @@
     peer = new Peer({key: apiKey, debug: 1});
     peer.on('open',function() {
       console.log('--opened--  join room:' + roomName);
+      //meshRoom = peer.joinRoom(roomName, {mode: 'sfu', stream: localStream});
       meshRoom = peer.joinRoom(roomName, {mode: 'mesh', stream: localStream});//videoCodec: 'VP8', audioCodec: 'opus'
       meshRoom.on('open', function() {
         console.log('joined the room:' + roomName);
