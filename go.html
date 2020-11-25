@@ -54,10 +54,12 @@
     peer.on('open',function() {
       console.log('--open--');
       if (stream) {
-        meshRoom = peer.joinRoom(roomName, {mode: 'sfu', stream: stream});
+        //meshRoom = peer.joinRoom(roomName, {mode: 'sfu', stream: stream});
+        meshRoom = peer.joinRoom(roomName, {mode: 'mesh', stream: stream});
       }
       else {
-        meshRoom = peer.joinRoom(roomName, {mode: 'sfu'});
+        //meshRoom = peer.joinRoom(roomName, {mode: 'sfu'});
+        meshRoom = peer.joinRoom(roomName, {mode: 'mesh'});
       }
       meshRoom.on('open', function() {
         console.log('joined the room:' + roomName);
